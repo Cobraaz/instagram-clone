@@ -1,5 +1,5 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
+import React from "react";
+import { Link } from "react-router-dom";
 export const Navbar = () => {
   return (
     <nav>
@@ -16,6 +16,9 @@ export const Navbar = () => {
           </li>
           <li>
             <Link to="/profile">Profile</Link>
+          </li>
+          <li>
+            <Link to="/create">Create Post</Link>
           </li>
         </ul>
       </div>
