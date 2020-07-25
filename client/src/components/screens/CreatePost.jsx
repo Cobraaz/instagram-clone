@@ -40,7 +40,7 @@ const CreatePost = () => {
         });
     }
   }, [url]);
-  
+
   const PostDetails = () => {
     const data = new FormData();
     data.append("file", image);
