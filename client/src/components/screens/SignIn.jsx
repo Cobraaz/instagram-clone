@@ -29,7 +29,6 @@ const SignIn = () => {
     })
       .then((res) => res.json())
       .then((data) => {
-        console.log(data);
         if (data.error) {
           M.toast({ html: data.error, classes: "#ef5350 red lighten-1" });
         } else {
