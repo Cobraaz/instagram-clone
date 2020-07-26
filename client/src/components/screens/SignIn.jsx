@@ -1,16 +1,15 @@
 import React, { useState, useContext } from "react";
-import { UserContext } from "../../App";
 import { Link, useHistory } from "react-router-dom";
+import { UserContext } from "../../App";
 import M from "materialize-css";
 const SignIn = () => {
   const { state, dispatch } = useContext(UserContext);
   const history = useHistory();
-  const [password, setpassword] = useState("");
+  const [password, setPasword] = useState("");
   const [email, setEmail] = useState("");
-
   const PostData = () => {
     if (
-      !/^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/.test(
+      !/^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/.test(
         email
       )
     ) {
@@ -29,14 +28,15 @@ const SignIn = () => {
     })
       .then((res) => res.json())
       .then((data) => {
+        console.log(data);
         if (data.error) {
-          M.toast({ html: data.error, classes: "#ef5350 red lighten-1" });
+          M.toast({ html: data.error, classes: "#c62828 red darken-3" });
         } else {
           localStorage.setItem("jwt", data.token);
           localStorage.setItem("user", JSON.stringify(data.user));
           dispatch({ type: "USER", payload: data.user });
           M.toast({
-            html: "SignedIn success",
+            html: "signedin success",
             classes: "#43a047 green darken-1",
           });
           history.push("/");
@@ -60,21 +60,23 @@ const SignIn = () => {
           type="password"
           placeholder="password"
           value={password}
-          onChange={(e) => setpassword(e.target.value)}
+          onChange={(e) => setPasword(e.target.value)}
         />
         <button
-          className="btn waves-effect waves-light #64b5f6 blue lighten-2"
-          type="submit"
-          name="action"
+          className="btn waves-effect waves-light #64b5f6 blue darken-1"
           onClick={() => PostData()}
         >
-          Submit
+          Login
         </button>
-        <h6>
+        <h5>
           <Link to="/signup">Dont have an account ?</Link>
+        </h5>
+        <h6>
+          <Link to="/reset">Forgot password ?</Link>
         </h6>
       </div>
     </div>
   );
 };
+
 export default SignIn;
